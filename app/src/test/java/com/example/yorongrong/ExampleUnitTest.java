@@ -1,4 +1,4 @@
-package com.example.scon;
+package com.example.yorongrong;
 
 import org.junit.Test;
 
