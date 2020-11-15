@@ -1,9 +1,11 @@
 package com.example.yyyy2.ui.home;
 
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,10 +15,14 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.yyyy2.R;
+//import com.example.yyyy2.ShowCamera;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+//    Camera camera;
+//    FrameLayout frameLayout;
+//    ShowCamera showCamera;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +36,11 @@ public class HomeFragment extends Fragment {
         //        //textView.setText(s);
         //    }
         //});
+
+//        frameLayout = root.findViewById(R.id.frameLayout);
+//        camera = android.hardware.Camera.open();
+//        showCamera = new ShowCamera(this.getActivity(), camera);
+//        frameLayout.addView(showCamera);
         return root;
     }
 }
