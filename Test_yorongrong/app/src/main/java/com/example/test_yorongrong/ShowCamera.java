@@ -2,6 +2,7 @@ package com.example.test_yorongrong;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.hardware.Camera;
 import android.view.Surface;
 import android.view.SurfaceHolder;
@@ -16,6 +17,8 @@ import java.util.List;
 public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
     Camera camera;
     SurfaceHolder holder;
+    public boolean safeToTakePicture=false;
+    public Bitmap tmpImg;
 
     public ShowCamera(Context context, Camera camera) {
         super(context);
@@ -42,7 +45,7 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
             camera.setDisplayOrientation(0);
             params.setRotation(0);
         }
-
+        params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
         params.setPictureSize(size.width, size.height);
         camera.setParameters(params);
 
@@ -56,7 +59,8 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
-
+        camera.startPreview();
+        safeToTakePicture=true;
     }
 
     @Override

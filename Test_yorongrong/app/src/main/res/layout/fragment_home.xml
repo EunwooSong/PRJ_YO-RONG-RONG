@@ -29,6 +29,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:src="@android:drawable/ic_menu_camera"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

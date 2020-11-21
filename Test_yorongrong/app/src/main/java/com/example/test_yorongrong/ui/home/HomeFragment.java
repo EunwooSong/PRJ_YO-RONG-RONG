@@ -1,6 +1,9 @@
 package com.example.test_yorongrong.ui.home;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.media.MediaRecorder;
 import android.os.Bundle;
@@ -14,6 +17,8 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -37,7 +42,9 @@ public class HomeFragment extends Fragment {
     FrameLayout frameLayout;
     ShowCamera showCamera;
     ImageButton camera_btn;
+
     private MediaRecorder mediaRecorder;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
@@ -56,7 +63,13 @@ public class HomeFragment extends Fragment {
         camera_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                camera.takePicture(null,null,PictureCallback);
+                if(showCamera.safeToTakePicture){
+                    camera.takePicture(null,null,PictureCallback);
+                    showCamera.safeToTakePicture=false;
+
+                    Intent intent = new Intent();
+                    intent.putExtra("cameraImg", showCamera.tmpImg);
+                }
             }
         });
 
@@ -69,22 +82,34 @@ public class HomeFragment extends Fragment {
         public void onPictureTaken(byte[] data, Camera camera) {
             File picture_file = getOutputMediaFile(MEDIA_TYPE_IMAGE);
 
-            if(picture_file==null){
+            camera.startPreview();
+//            if(picture_file==null){
+//                showCamera.safeToTakePicture = true;
+//                return;
+//            }
+//
+//                try{
+//                FileOutputStream fos=new FileOutputStream(picture_file);
+//                fos.write(data);
+//                fos.close();
+//
+//                }
+//                catch (FileNotFoundException e){
+//                    e.printStackTrace();
+//                }
+//                catch (IOException e){
+//                    e.printStackTrace();
+//                }
+//                showCamera.safeToTakePicture=true;
+            try {
+                Bitmap img = BitmapFactory.decodeByteArray(data, 0, data.length);
+                showCamera.tmpImg = img;
+
+            }catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(getActivity().getApplicationContext(), "[ Image Error ]", Toast.LENGTH_SHORT).show();
                 return;
             }
-
-                try{
-                FileOutputStream fos=new FileOutputStream(picture_file);
-                fos.write(data);
-                fos.close();
-
-                }
-                catch (FileNotFoundException e){
-                    e.printStackTrace();
-                }
-                catch (IOException e){
-                    e.printStackTrace();
-                }
 
 
         }
@@ -106,10 +131,5 @@ public class HomeFragment extends Fragment {
         }
     }
 
-//    @Override
-//    protected void onPause(){
-//        super.onPause();
-//        releaseMediaRecorder();
-//        releaseCamera();
-//    }
+
 }
