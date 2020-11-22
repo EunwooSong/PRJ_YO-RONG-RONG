@@ -1,5 +1,6 @@
 package com.example.test_yorongrong.ui.home;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -26,6 +27,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import com.example.test_yorongrong.R;
 import com.example.test_yorongrong.ShowCamera;
+import com.example.test_yorongrong.ui.result.CameraActivity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -67,8 +69,7 @@ public class HomeFragment extends Fragment {
                     camera.takePicture(null,null,PictureCallback);
                     showCamera.safeToTakePicture=false;
 
-                    Intent intent = new Intent();
-                    intent.putExtra("cameraImg", showCamera.tmpImg);
+
                 }
             }
         });
@@ -105,6 +106,12 @@ public class HomeFragment extends Fragment {
                 Bitmap img = BitmapFactory.decodeByteArray(data, 0, data.length);
                 showCamera.tmpImg = img;
 
+                Intent intent = new Intent();
+                ComponentName name = new ComponentName("com.example.test_yorongrong", "com.example.test_yorongrong.ui.result.CameraActivity");
+                intent.setComponent(name);
+                intent.putExtra("cameraImg", showCamera.tmpImg);
+
+                startActivityForResult(intent, 100);
             }catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(getActivity().getApplicationContext(), "[ Image Error ]", Toast.LENGTH_SHORT).show();
