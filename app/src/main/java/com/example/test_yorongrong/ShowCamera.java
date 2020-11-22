@@ -4,14 +4,22 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.hardware.Camera;
+import android.os.AsyncTask;
+import android.provider.Settings;
+import android.util.Base64;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
 
 //https://www.youtube.com/watch?v=_wZvds9CfuE
 public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
@@ -25,7 +33,6 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
         this.camera = camera;
         holder = getHolder();
         holder.addCallback(this);
-
     }
 
     @Override
@@ -52,6 +59,7 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
         try {
             camera.setPreviewDisplay(holder);
             camera.startPreview();
+//            this.ServerRequest();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -67,5 +75,43 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
     public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
         camera.stopPreview();
         camera.release();
+    }
+
+    private void ServerRequest(){
+        final String android_id = Settings.Secure.getString(getContext().getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String APIData = "{phone_id:" + android_id + ", image:";
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    tmpImg.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] imageBytes = baos.toByteArray();
+                    String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+                    APIData += encodedImage + "}";
+
+                    URL APIEndpoint = new URL("https://scon.postect.tech/");
+                    HttpsURLConnection APIConnection =
+                            (HttpsURLConnection) APIEndpoint.openConnection();
+                    APIConnection.setRequestProperty("User-Agent", "yrr");
+                    APIConnection.setRequestMethod("POST");
+                    APIConnection.setDoOutput(true);
+                    APIConnection.getOutputStream().write(APIData.getBytes());
+
+                    if (APIConnection.getResponseCode() == 200) {
+                        // Success
+                        // Further processing here
+                    } else {
+                        // Error handling code goes here
+                    }
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 }
