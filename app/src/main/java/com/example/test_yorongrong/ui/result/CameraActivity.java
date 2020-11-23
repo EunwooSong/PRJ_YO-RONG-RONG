@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.example.test_yorongrong.R;
 
 public class CameraActivity extends AppCompatActivity {
-
     Bitmap img = null;
     ImageView imageView;
 
@@ -27,7 +26,8 @@ public class CameraActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Create Image", (int) 3).show();
         }
 
-        Toast.makeText(getApplicationContext(), "Failed to Create Image", (int) 3).show();
+        Toast.makeText(getApplicationContext(), "Failed " +
+                "to Create Image", (int) 3).show();
     }
 
     @Override
