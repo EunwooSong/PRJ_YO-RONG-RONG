@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -22,7 +23,8 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
 
         Intent intent = getIntent();
-        img = (Bitmap) intent.getParcelableExtra("cameraImg");
+        byte[] data = getIntent().getByteArrayExtra("cameraImg");
+        img = BitmapFactory.decodeByteArray(data, 0, data.length);
         img = rotateBmp(img);
 
         imageView = (ImageView) findViewById(R.id.cameraImg);

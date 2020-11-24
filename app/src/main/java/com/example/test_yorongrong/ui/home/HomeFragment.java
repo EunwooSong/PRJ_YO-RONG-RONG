@@ -40,9 +40,9 @@ import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-    Camera camera;
+    public Camera camera;
     FrameLayout frameLayout;
-    ShowCamera showCamera;
+    public ShowCamera showCamera;
     ImageButton camera_btn;
 
     private MediaRecorder mediaRecorder;
@@ -54,26 +54,21 @@ public class HomeFragment extends Fragment {
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        camera_btn = root.findViewById(R.id.btn_camera);
+        //camera_btn = root.findViewById(R.id.);
 
         frameLayout = root.findViewById(R.id.frameLayout);
         camera = Camera.open();
 
         showCamera = new ShowCamera(this.getActivity(), camera);
         frameLayout.addView(showCamera);
-
-        camera_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(showCamera.safeToTakePicture){
-                    camera.takePicture(null,null,PictureCallback);
-                    showCamera.safeToTakePicture=false;
-                }
-            }
-        });
-
-
         return root;
+    }
+
+    public void CaptureCamera() {
+        if (showCamera.safeToTakePicture) {
+            camera.takePicture(null, null, PictureCallback);
+            showCamera.safeToTakePicture = false;
+        }
     }
 
     Camera.PictureCallback PictureCallback = new Camera.PictureCallback() {
@@ -82,24 +77,7 @@ public class HomeFragment extends Fragment {
             File picture_file = getOutputMediaFile(MEDIA_TYPE_IMAGE);
 
             camera.startPreview();
-//            if(picture_file==null){
-//                showCamera.safeToTakePicture = true;
-//                return;
-//            }
-//
-//                try{
-//                FileOutputStream fos=new FileOutputStream(picture_file);
-//                fos.write(data);
-//                fos.close();
-//
-//                }
-//                catch (FileNotFoundException e){
-//                    e.printStackTrace();
-//                }
-//                catch (IOException e){
-//                    e.printStackTrace();
-//                }
-//                showCamera.safeToTakePicture=true;
+
             try {
                 Bitmap img = BitmapFactory.decodeByteArray(data, 0, data.length);
                 showCamera.tmpImg = img;
@@ -107,7 +85,7 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent();
                 ComponentName name = new ComponentName("com.example.test_yorongrong", "com.example.test_yorongrong.ui.result.CameraActivity");
                 intent.setComponent(name);
-                intent.putExtra("cameraImg", showCamera.tmpImg);
+                intent.putExtra("cameraImg", data);
 
                 startActivityForResult(intent, 100);
             }catch (Exception e) {
@@ -115,8 +93,6 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getActivity().getApplicationContext(), "[ Image Error ]", Toast.LENGTH_SHORT).show();
                 return;
             }
-
-
         }
     };
 

@@ -1,5 +1,8 @@
 package com.example.test_yorongrong.ui.home;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
