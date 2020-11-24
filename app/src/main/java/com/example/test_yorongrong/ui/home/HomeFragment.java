@@ -68,8 +68,6 @@ public class HomeFragment extends Fragment {
                 if(showCamera.safeToTakePicture){
                     camera.takePicture(null,null,PictureCallback);
                     showCamera.safeToTakePicture=false;
-
-
                 }
             }
         });

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.yongbeam:Android-Y-PhotoPicker:1.0.2@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a3c972d0ce8994aed9c28fdd4aa1a6b9/jetified-Android-Y-PhotoPicker-1.0.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a3c972d0ce8994aed9c28fdd4aa1a6b9/jetified-Android-Y-PhotoPicker-1.0.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a3c972d0ce8994aed9c28fdd4aa1a6b9/jetified-Android-Y-PhotoPicker-1.0.2/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

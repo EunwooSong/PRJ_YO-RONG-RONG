@@ -17,20 +17,6 @@ public class CameraActivity extends AppCompatActivity {
     ImageView imageView;
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == 100 && resultCode == RESULT_OK) {
-            img = (Bitmap) data.getParcelableExtra("cameraImg");
-            imageView.setImageBitmap(img);
-            Toast.makeText(getApplicationContext(), "Create Image", (int) 3).show();
-        }
-
-        Toast.makeText(getApplicationContext(), "Failed " +
-                "to Create Image", (int) 3).show();
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);

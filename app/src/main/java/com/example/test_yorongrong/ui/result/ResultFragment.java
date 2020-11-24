@@ -9,7 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.test_yorongrong.R;
+import com.example.test_yorongrong.ui.result.Card.ResultAdapter;
+import com.example.test_yorongrong.ui.result.Card.ResultModel;
 import com.yarolegovich.discretescrollview.DiscreteScrollView;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +44,9 @@ public class ResultFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment ResultFragment.
      */
+
+    ArrayList<ResultModel> models = new ArrayList<>();
+
     // TODO: Rename and change types and number of parameters
     public static ResultFragment newInstance(String param1, String param2) {
         ResultFragment fragment = new ResultFragment();
@@ -66,9 +74,32 @@ public class ResultFragment extends Fragment {
         View root =  inflater.inflate(R.layout.fragment_result, container, false);
 
         DiscreteScrollView scrollView = root.findViewById(R.id.picker);
-
-
+        createResultModel();
+        scrollView.setAdapter(new ResultAdapter(getActivity(), models));
 
         return root;
+    }
+
+    public void createResultModel() {
+        ResultModel m = new ResultModel();
+        m.setTitle("ResultModel");
+        m.setPresent("---%");
+        m.setShop_info("11번가");
+        m.setImg(R.drawable.images);
+        models.add(m);
+
+        m = new ResultModel();
+        m.setTitle("ResultModel");
+        m.setPresent("---%");
+        m.setShop_info("11번가");
+        m.setImg(R.drawable.images);
+        models.add(m);
+
+        m = new ResultModel();
+        m.setTitle("ResultModel");
+        m.setPresent("---%");
+        m.setShop_info("11번가");
+        m.setImg(R.drawable.images);
+        models.add(m);
     }
 }
