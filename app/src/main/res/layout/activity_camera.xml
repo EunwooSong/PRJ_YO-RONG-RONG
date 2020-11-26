@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,11 +7,26 @@
     tools:context=".ui.result.ResultActivity"
     android:orientation="vertical"
     >
+    <Button
+        android:id="@+id/btn_test"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Test Button"></Button>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_main"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:elevation="4dp"
+        android:visibility="visible"
+        app:backgroundTint="#cb9ca1"
+        app:rippleColor="@android:color/white"
+        app:tint="@android:color/white"
+        />
 
     <FrameLayout
         android:id="@+id/result_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </FrameLayout>
-
-</LinearLayout>
+</FrameLayout>

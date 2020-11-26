@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="20dp"
     android:layout_width="match_parent"
-    android:layout_height="500dp"
+    android:layout_height="match_parent"
     app:cardCornerRadius="40dp"
     app:cardUseCompatPadding="true">
     <LinearLayout
@@ -16,10 +16,12 @@
         <ImageView
             android:id="@+id/image_shop"
             android:layout_width="match_parent"
-            android:layout_height="325dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="18dp"
-            android:layout_marginRight="30dp">
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            >
 
         </ImageView>
         <LinearLayout
@@ -29,11 +31,13 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_weight="2"
+            >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1.5"
                 android:orientation="vertical"
                 >
 
@@ -41,23 +45,30 @@
                     android:id="@+id/result_title"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
+                    android:layout_weight="1.5"
                     android:gravity="center"
-                    android:text="옷 이름 입니다"
-                    android:textSize="30sp"
-                    app:autoSizeMaxTextSize="40sp"
-                    app:autoSizeMinTextSize="10sp"
+                    android:text="옷 이름 입니다 하하하"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="12sp"
+                    android:autoSizeMaxTextSize="30sp"
                     android:textAlignment="viewStart"
-                    tools:ignore="RtlCompat" />
+                    tools:ignore="RtlCompat"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    />
                 <TextView
                     android:id="@+id/result_info"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:textSize="30sp"
+                    android:layout_weight="1.5"
+                    android:autoSizeTextType="uniform"
+                    android:autoSizeMinTextSize="12sp"
+                    android:autoSizeMaxTextSize="30sp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:gravity="center"
                     android:textAlignment="viewStart"
-                    android:text="쇼핑몰"
+                    android:text="11번가 입니다"
                     tools:ignore="RtlCompat" />
             </LinearLayout>
 

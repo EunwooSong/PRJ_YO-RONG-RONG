@@ -39,21 +39,21 @@ public class ResultActivity extends AppCompatActivity {
         loading = new LoadingFragment();
         Bundle bundle = new Bundle();
         bundle.putString("path", path);
-
         loading.setArguments(bundle);
 
         result = new ResultFragment();
+        result.setArguments(bundle);
 
         //First Fragment
         switchFragment(loading);
 
 
-//        ((Button)findViewById(R.id.btn_test)).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                switchFragment(result);
-//            }
-//        });
+        ((Button)findViewById(R.id.btn_test)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switchFragment(result);
+            }
+        });
     }
 
     private void switchFragment(Fragment fragment) {

@@ -85,7 +85,6 @@ public class LoadingFragment extends Fragment {
             String path = getArguments().getString("path");
 
             if (path != null && !path.isEmpty()) {
-                Log.i("test1", "path : " + path);
 
                 img = BitmapFactory.decodeFile(path);
                 imageView.setImageBitmap(img);

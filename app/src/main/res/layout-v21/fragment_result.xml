@@ -3,18 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_main"
-        android:layout_width="85dp"
-        android:layout_height="85dp"
-        android:elevation="4dp"
-        android:visibility="visible"
-        app:backgroundTint="#cb9ca1"
-        app:layout_anchor="@id/bottombar_main"
-        app:rippleColor="@android:color/white"
-        app:tint="@android:color/white" />
+    android:orientation="vertical"
+    >
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/img_capture"
@@ -22,8 +12,7 @@
         android:layout_height="300dp"
         android:layout_margin="20dp"
         app:riv_corner_radius="30dp"
-        android:elevation="4dp"
-        tools:targetApi="lollipop"></com.makeramen.roundedimageview.RoundedImageView>
+        android:elevation="4dp"></com.makeramen.roundedimageview.RoundedImageView>
 
     <com.yarolegovich.discretescrollview.DiscreteScrollView
         android:id="@+id/picker"
