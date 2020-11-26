@@ -52,7 +52,7 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
             camera.setDisplayOrientation(0);
             params.setRotation(0);
         }
-        //params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+        params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
         params.setPictureSize(size.width, size.height);
         camera.setParameters(params);
 
@@ -73,7 +73,7 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
-        camera.stopPreview();
+        //camera.stopPreview();
         camera.release();
     }
 

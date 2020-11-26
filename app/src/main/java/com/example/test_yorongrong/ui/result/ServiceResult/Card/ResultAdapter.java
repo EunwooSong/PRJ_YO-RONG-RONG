@@ -1,4 +1,4 @@
-package com.example.test_yorongrong.ui.result.Card;
+package com.example.test_yorongrong.ui.result.ServiceResult.Card;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.test_yorongrong.R;
-import com.example.test_yorongrong.ui.dashboard.CardHolder;
 
 import java.util.ArrayList;
 

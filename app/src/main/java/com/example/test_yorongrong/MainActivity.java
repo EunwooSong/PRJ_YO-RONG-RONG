@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.example.test_yorongrong.ui.dashboard.DashboardFragment;
@@ -39,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
     };
 
     FloatingActionButton capture_btn;
+    private Animation animation_in;
+    private Animation animation_out;
+
+    HomeFragment home;
+    DashboardFragment dash;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +58,28 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        //java8.....
+        animation_in = AnimationUtils.loadAnimation(this, R.anim.anim);
+        animation_out = AnimationUtils.loadAnimation(this, R.anim.out_anim);
+
+        home = new HomeFragment();
+        dash =  new DashboardFragment();
 
         navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        MainActivity.this.switchFragment(new HomeFragment());
+                        capture_btn.show();
+                        capture_btn.setVisibility(View.VISIBLE);
+                        capture_btn.startAnimation(animation_in);
+                        MainActivity.this.switchFragment(home);
                         break;
+
                     case R.id.navigation_dashboard:
-                        MainActivity.this.switchFragment(new DashboardFragment());
+                        capture_btn.hide();
+                        capture_btn.startAnimation(animation_out);
+                        capture_btn.setVisibility(View.GONE);
+                        MainActivity.this.switchFragment(dash);
                         break;
                 }
                 return true;

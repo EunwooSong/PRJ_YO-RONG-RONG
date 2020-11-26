@@ -153,6 +153,7 @@
     <orderEntry type="library" name="Gradle: androidx.annotation:annotation-experimental:1.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.makeramen:roundedimageview:2.3.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.yarolegovich:discrete-scrollview:1.5.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.wajahatkarim3.EasyFlipView:EasyFlipView:3.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.github.yongbeam:Android-Y-PhotoPicker:1.0.2@aar" level="project" />
   </component>
 </module>

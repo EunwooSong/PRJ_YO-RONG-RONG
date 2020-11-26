@@ -1,4 +1,4 @@
-package com.example.test_yorongrong.ui.result;
+package com.example.test_yorongrong.ui.result.ServiceResult;
 
 import android.os.Bundle;
 
@@ -9,11 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.test_yorongrong.R;
-import com.example.test_yorongrong.ui.result.Card.ResultAdapter;
-import com.example.test_yorongrong.ui.result.Card.ResultModel;
+import com.example.test_yorongrong.ui.result.ServiceResult.Card.ResultAdapter;
+import com.example.test_yorongrong.ui.result.ServiceResult.Card.ResultModel;
 import com.yarolegovich.discretescrollview.DiscreteScrollView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**

@@ -18,36 +18,34 @@
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottombar_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_gravity="bottom"
         android:clickable="false"
         app:elevation="4dp"
         app:fabAlignmentMode="center" />
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom">
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomnav_main"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            app:backgroundTint="@android:color/transparent"
-            app:elevation="0dp"
-            app:menu="@menu/bottom_nav_menu"/>
-
-    </FrameLayout>
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
         android:elevation="4dp"
-        app:rippleColor="@android:color/white"
-        app:tint="@android:color/white"
+        android:visibility="visible"
+        app:backgroundTint="#cb9ca1"
         app:layout_anchor="@id/bottombar_main"
-        android:visibility="visible"/>
+        app:rippleColor="@android:color/white"
+        app:tint="@android:color/white" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomnav_main"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:clickable="false"
+        app:backgroundTint="@android:color/transparent"
+        app:elevation="0dp"
+        app:itemIconTint="#ff80ab"
+        app:itemTextColor="#D58E8E"
+        app:layout_anchor="@+id/bottombar_main"
+        app:layout_anchorGravity="center"
+        app:menu="@menu/bottom_nav_menu" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

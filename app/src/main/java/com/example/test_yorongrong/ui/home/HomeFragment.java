@@ -1,7 +1,6 @@
 package com.example.test_yorongrong.ui.home;
 
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,31 +8,20 @@ import android.hardware.Camera;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import com.example.test_yorongrong.R;
 import com.example.test_yorongrong.ShowCamera;
-import com.example.test_yorongrong.ui.result.CameraActivity;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.security.spec.EncodedKeySpec;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
@@ -83,7 +71,7 @@ public class HomeFragment extends Fragment {
                 showCamera.tmpImg = img;
 
                 Intent intent = new Intent();
-                ComponentName name = new ComponentName("com.example.test_yorongrong", "com.example.test_yorongrong.ui.result.CameraActivity");
+                ComponentName name = new ComponentName("com.example.test_yorongrong", "com.example.test_yorongrong.ui.result.ResultActivity");
                 intent.setComponent(name);
                 intent.putExtra("cameraImg", data);
 

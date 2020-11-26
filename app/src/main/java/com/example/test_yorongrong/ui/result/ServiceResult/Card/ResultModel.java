@@ -1,4 +1,4 @@
-package com.example.test_yorongrong.ui.result.Card;
+package com.example.test_yorongrong.ui.result.ServiceResult.Card;
 
 public class ResultModel {
     private String title;
