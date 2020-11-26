@@ -48,8 +48,7 @@ public class DashboardFragment extends Fragment {
     private ArrayList<Model> getMyList() {
 
         Model m = new Model();
-
-        m.setTitle_back("챈스챈스");
+        m.setTitle_back("챈스챈스\n뒤집으면 카피논란이 있는 브랜드가 나옵니다");
         m.setImg_back(R.drawable.chance_chance);
         m.setTitle("체크메이트");
         m.setImg(R.drawable.checkmate);

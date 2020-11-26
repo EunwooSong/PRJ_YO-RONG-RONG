@@ -6,11 +6,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:backgroundTint="#D5C4C4"
+    tools:targetApi="lollipop"
+    >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:backgroundTint="#D5C4C4"
+        android:background="#D5C4C4"
+        tools:targetApi="lollipop" />
 
 </LinearLayout>
