@@ -13,6 +13,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent">
+        <ImageButton
+            android:id="@+id/btn_load"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_baseline_add_box_24"
+            android:tint="@android:color/white"
+            android:backgroundTint="@color/IconColor"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            >
+        </ImageButton>
 
         <FrameLayout
             android:id="@+id/frameLayout"
@@ -21,5 +33,4 @@
         </FrameLayout>
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

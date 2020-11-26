@@ -63,6 +63,13 @@ public class HomeFragment extends Fragment {
 
         showCamera = new ShowCamera(this.getActivity(), camera);
         frameLayout.addView(showCamera);
+
+        root.findViewById(R.id.btn_load).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).goToAlbum();
+            }
+        });
         return root;
     }
 
@@ -113,12 +120,7 @@ public class HomeFragment extends Fragment {
 
                     camera.startPreview();
 
-                    Intent intent = new Intent();
-                    ComponentName name = new ComponentName("com.example.test_yorongrong", "com.example.test_yorongrong.ui.result.ResultActivity");
-                    intent.setComponent(name);
-                    intent.putExtra("cameraImg", imageFilePath);
-
-                    startActivityForResult(intent, 100);
+                    ((MainActivity)getActivity()).SendCapture(imageFilePath);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {

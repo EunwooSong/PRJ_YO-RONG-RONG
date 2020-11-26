@@ -11,20 +11,21 @@
     <ImageView
         android:id="@+id/cameraImg"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="400dp"
         android:layout_marginLeft = "30dp"
-        android:layout_marginTop = "30dp"
+        android:layout_marginTop = "50dp"
         android:layout_marginRight="30dp"
         tools:src="@tools:sample/avatars"
         />
 
     <ProgressBar
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:layout_width="85dp"
         android:layout_height="85dp"
         android:layout_gravity="center"
         android:indeterminateTint="#CA7C84"
         android:progressTint="#ea5550"
+        android:layout_marginBottom="35dp"
         />
 
     <TextView
@@ -39,4 +40,5 @@
         android:textStyle="bold"
         android:fontFamily="@font/nanum_square"
         android:typeface="normal" />
+
 </LinearLayout>

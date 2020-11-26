@@ -21,6 +21,7 @@ import com.example.test_yorongrong.R;
 import com.example.test_yorongrong.ui.home.HomeFragment;
 import com.example.test_yorongrong.ui.result.ServiceResult.ResultFragment;
 import com.example.test_yorongrong.ui.result.loading.LoadingFragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -54,10 +55,18 @@ public class ResultActivity extends AppCompatActivity {
                 switchFragment(result);
             }
         });
+
+        ((FloatingActionButton)findViewById(R.id.btn_back)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void switchFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right);
         transaction.replace(R.id.result_fragment, fragment);
         transaction.commit();
     }

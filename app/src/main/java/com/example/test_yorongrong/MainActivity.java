@@ -4,20 +4,16 @@ import android.Manifest;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.hardware.Camera;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Toast;
 
 import com.example.test_yorongrong.ui.dashboard.DashboardFragment;
 import com.example.test_yorongrong.ui.home.HomeFragment;
@@ -28,17 +24,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
+    private static final int PICK_FROM_ALBUM = 1;
 
     String[] permission_list = {
             Manifest.permission.CAMERA,
@@ -94,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         });
         switchFragment(new HomeFragment());
 
-        capture_btn = findViewById(R.id.fab_main);
+        capture_btn = findViewById(R.id.btn_back);
         capture_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,8 +112,53 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.nav_host_fragment, fragment);
         transaction.commit();
     }
-}
 
+    public void goToAlbum() {
+
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+        startActivityForResult(intent, PICK_FROM_ALBUM);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_FROM_ALBUM) {
+            Uri photoUri = data.getData();
+            Cursor cursor = null;
+
+            try {
+                String[] proj = {MediaStore.Images.Media.DATA};
+
+                assert photoUri != null;
+                cursor = getContentResolver().query(photoUri, proj, null, null, null);
+
+                assert cursor != null;
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+                cursor.moveToFirst();
+
+                File tempFile = new File(cursor.getString(column_index));
+                SendCapture(tempFile.getPath());
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+            }
+        }
+    }
+
+    public void SendCapture(String imgPath) {
+        Intent intent = new Intent();
+        ComponentName name = new ComponentName("com.example.test_yorongrong", "com.example.test_yorongrong.ui.result.ResultActivity");
+        intent.setComponent(name);
+        intent.putExtra("cameraImg", imgPath);
+
+        startActivityForResult(intent, 100);
+    }
+
+}
 
 // Passing each menu ID as a set of Ids because each
 // menu should be considered as top level destinations.

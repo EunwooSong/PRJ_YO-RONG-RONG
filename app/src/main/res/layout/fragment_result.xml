@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_main"
+        android:id="@+id/btn_back"
         android:layout_width="85dp"
         android:layout_height="85dp"
         android:elevation="4dp"

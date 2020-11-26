@@ -14,14 +14,15 @@
         android:text="Test Button"></Button>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_main"
+        android:id="@+id/btn_back"
         android:layout_width="85dp"
         android:layout_height="85dp"
-        android:elevation="4dp"
+        android:src="@drawable/ic_baseline_arrow_back_24"
         android:visibility="visible"
         app:backgroundTint="#cb9ca1"
-        app:rippleColor="@android:color/white"
+        app:fabCustomSize="85dp"
         app:tint="@android:color/white"
+        app:rippleColor="@android:color/white"
         />
 
     <FrameLayout
