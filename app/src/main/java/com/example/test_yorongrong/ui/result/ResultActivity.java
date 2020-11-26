@@ -2,6 +2,7 @@ package com.example.test_yorongrong.ui.result;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -26,41 +27,41 @@ public class ResultActivity extends AppCompatActivity {
     LoadingFragment loading;
     ResultFragment result;
 
-    public Bitmap img;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
         Intent intent = getIntent();
-        byte[] data = getIntent().getByteArrayExtra("cameraImg");
-        img = BitmapFactory.decodeByteArray(data, 0, data.length);
-        img = rotateBmp(img);
-
-        if(img == null)
-            Log.e("error", "img null");
+        String path = intent.getStringExtra("cameraImg");
+        Log.i("test", "path : " + path);
 
         loading = new LoadingFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("path", path);
+
+        loading.setArguments(bundle);
+
         result = new ResultFragment();
 
         //First Fragment
-        FragmentTransaction trans =  getSupportFragmentManager().beginTransaction();
-        trans.replace(R.id.result_fragment, loading);
-        trans.commit();
-        loading.setImageView(data);
+        switchFragment(loading);
 
-        ((Button)findViewById(R.id.btn_test)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentManager manager = getSupportFragmentManager();
-                FragmentTransaction trans = manager.beginTransaction();
 
-                trans.replace(R.id.result_fragment, result);
-                trans.commit();
-            }
-        });
+//        ((Button)findViewById(R.id.btn_test)).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                switchFragment(result);
+//            }
+//        });
     }
+
+    private void switchFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.result_fragment, fragment);
+        transaction.commit();
+    }
+
 
     public Bitmap rotateBmp(Bitmap bmp){
         Matrix matrix = new Matrix();

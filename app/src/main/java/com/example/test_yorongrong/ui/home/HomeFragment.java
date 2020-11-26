@@ -6,8 +6,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.media.MediaRecorder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +21,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+
+import com.example.test_yorongrong.MainActivity;
 import com.example.test_yorongrong.R;
 import com.example.test_yorongrong.ShowCamera;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 
@@ -32,6 +42,10 @@ public class HomeFragment extends Fragment {
     FrameLayout frameLayout;
     public ShowCamera showCamera;
     ImageButton camera_btn;
+
+    private File tempFile;
+    private String imageFilePath;
+    private String photoUri;
 
     private MediaRecorder mediaRecorder;
 
@@ -62,42 +76,71 @@ public class HomeFragment extends Fragment {
     Camera.PictureCallback PictureCallback = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
-            File picture_file = getOutputMediaFile(MEDIA_TYPE_IMAGE);
-
-            camera.startPreview();
-
+            File picture_file = null;
             try {
-                Bitmap img = BitmapFactory.decodeByteArray(data, 0, data.length);
-                showCamera.tmpImg = img;
-
-                Intent intent = new Intent();
-                ComponentName name = new ComponentName("com.example.test_yorongrong", "com.example.test_yorongrong.ui.result.ResultActivity");
-                intent.setComponent(name);
-                intent.putExtra("cameraImg", data);
-
-                startActivityForResult(intent, 100);
-            }catch (Exception e) {
+                picture_file = createImageFile();
+            } catch (IOException e) {
                 e.printStackTrace();
-                Toast.makeText(getActivity().getApplicationContext(), "[ Image Error ]", Toast.LENGTH_SHORT).show();
+            }
+
+            //camera.startPreview();
+
+//            try {
+//                MainActivity mainActivity = (MainActivity) getActivity();
+//                Bitmap img = BitmapFactory.decodeByteArray(data, 0, data.length);
+//                showCamera.tmpImg = img;
+//
+//                Intent intent = new Intent();
+//                ComponentName name = new ComponentName("com.example.test_yorongrong", "com.example.test_yorongrong.ui.result.ResultActivity");
+//                intent.setComponent(name);
+//                intent.putExtra("cameraImg", data);
+//
+//                startActivityForResult(intent, 100);
+//            }catch (Exception e) {
+//                e.printStackTrace();
+//                Toast.makeText(getActivity().getApplicationContext(), "[ Image Error ]", Toast.LENGTH_SHORT).show();
+//                return;
+//            }
+
+            if(picture_file == null) {
                 return;
+            }
+            else {
+                try {
+                    FileOutputStream fos  = new FileOutputStream(picture_file);
+                    fos.write(data);
+                    fos.close();
+
+                    camera.startPreview();
+
+                    Intent intent = new Intent();
+                    ComponentName name = new ComponentName("com.example.test_yorongrong", "com.example.test_yorongrong.ui.result.ResultActivity");
+                    intent.setComponent(name);
+                    intent.putExtra("cameraImg", imageFilePath);
+
+                    startActivityForResult(intent, 100);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     };
 
-    private File getOutputMediaFile(int mediaTypeImage) {
-        String state = Environment.getExternalStorageState();
-        if(!state.equals(Environment.MEDIA_MOUNTED)){
-            return null;
-        }
-        else{
-            File folder_gui=new File(Environment.getExternalStorageDirectory()+File.separator+"GUI");
+    private File createImageFile() throws IOException {
+        // 이미지 파일 이름 ( blackJin_{시간}_ )
+        String timeStamp = new SimpleDateFormat("HHmmss").format(new Date());
+        String imageFileName = "temp_" + timeStamp + "_";
 
-            if(!folder_gui.exists()){
-                folder_gui.mkdir();
-            }
-            File outputFile = new File(folder_gui,"temp.jpg");
-            return outputFile;
-        }
+        // 이미지가 저장될 폴더 이름 ( blackJin )
+        File storageDir = new File(Environment.getExternalStorageDirectory() + "/YoRongRong/");
+        if (!storageDir.exists()) storageDir.mkdirs();
+
+        // 빈 파일 생성
+        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
+        imageFilePath = image.getPath();
+        return image;
     }
 
 

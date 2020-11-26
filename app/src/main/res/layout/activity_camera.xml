@@ -8,12 +8,6 @@
     android:orientation="vertical"
     >
 
-    <Button
-        android:id="@+id/btn_test"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/test_next" />
-
     <FrameLayout
         android:id="@+id/result_fragment"
         android:layout_width="match_parent"

@@ -2,10 +2,12 @@ package com.example.test_yorongrong.ui.result.loading;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,10 @@ import android.widget.ImageView;
 
 import com.example.test_yorongrong.R;
 import com.example.test_yorongrong.ui.result.ResultActivity;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URI;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,10 +77,22 @@ public class LoadingFragment extends Fragment {
         // Inflate the layout for this fragment
         //img = ((ResultActivity) getActivity()).img;
 
-        imageView = (ImageView) container.findViewById(R.id.cameraImg);
-        try{imageView.setImageBitmap(img);}catch(Exception e){Log.e("",e+"");}
+        View root =  inflater.inflate(R.layout.fragment_loading, container, false);
 
-        return inflater.inflate(R.layout.fragment_loading, container, false);
+        imageView = root.findViewById(R.id.cameraImg);
+
+        if(getArguments() != null) {
+            String path = getArguments().getString("path");
+
+            if (path != null && !path.isEmpty()) {
+                Log.i("test1", "path : " + path);
+
+                img = BitmapFactory.decodeFile(path);
+                imageView.setImageBitmap(img);
+            }
+        }
+
+        return root;
     }
 
     public void setImageView(byte[] data) {

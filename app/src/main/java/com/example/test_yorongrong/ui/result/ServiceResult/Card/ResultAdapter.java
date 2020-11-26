@@ -1,6 +1,7 @@
 package com.example.test_yorongrong.ui.result.ServiceResult.Card;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.test_yorongrong.R;
+import com.yarolegovich.discretescrollview.DiscreteScrollView;
 
 import java.util.ArrayList;
 
@@ -30,6 +32,8 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ResultHolder holder, int position) {
+        Log.i("model", "test : " + models.get(position).getTitle());
+
         holder.mTitle.setText(models.get(position).getTitle());
         holder.mImageView.setImageResource(models.get(position).getImg());
         holder.mShopInfo.setText(models.get(position).getShop_info());

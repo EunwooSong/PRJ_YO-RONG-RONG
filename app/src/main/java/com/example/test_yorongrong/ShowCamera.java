@@ -74,7 +74,7 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceDestroyed(@NonNull SurfaceHolder holder) {
         //camera.stopPreview();
-        camera.release();
+        //camera.release();
     }
 
     private void ServerRequest(){

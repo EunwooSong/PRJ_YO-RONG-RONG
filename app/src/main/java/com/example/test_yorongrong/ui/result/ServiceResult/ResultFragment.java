@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,33 +73,44 @@ public class ResultFragment extends Fragment {
         // Inflate the layout for this fragment
         View root =  inflater.inflate(R.layout.fragment_result, container, false);
 
-        DiscreteScrollView scrollView = root.findViewById(R.id.picker);
         createResultModel();
-        scrollView.setAdapter(new ResultAdapter(getActivity(), models));
+        DiscreteScrollView scrollView = root.findViewById(R.id.picker);
+
+        ResultAdapter adapter = new ResultAdapter(getActivity(), models);
+        scrollView.setAdapter(adapter);
 
         return root;
     }
 
     public void createResultModel() {
-        ResultModel m = new ResultModel();
-        m.setTitle("ResultModel");
+        ResultModel m;
+
+        m = new ResultModel();
+        m.setTitle("ResultModel1");
         m.setPresent("---%");
         m.setShop_info("11번가");
         m.setImg(R.drawable.images);
         models.add(m);
 
         m = new ResultModel();
-        m.setTitle("ResultModel");
+        m.setTitle("ResultModel2");
         m.setPresent("---%");
         m.setShop_info("11번가");
         m.setImg(R.drawable.images);
         models.add(m);
 
         m = new ResultModel();
-        m.setTitle("ResultModel");
+        m.setTitle("ResultModel3");
         m.setPresent("---%");
         m.setShop_info("11번가");
         m.setImg(R.drawable.images);
         models.add(m);
+
+        for (ResultModel model:
+             models) {
+            Log.i("model", "test : " + model.getTitle());
+        }
+
+        Log.i("model", "test : " + models.size());
     }
 }

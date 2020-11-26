@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.wajahatkarim3.easyflipview.EasyFlipView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:flipOnTouch="false"
+    app:flipEnabled="true"
+    app:flipDuration="400"
+    app:flipFrom="right"
+    app:flipType="horizontal"
+    app:autoFlipBack="false"
+    android:id="@+id/dash_flip"
+    >
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_margin="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            app:cardCornerRadius="20dp"
+            app:cardUseCompatPadding="true">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/imageview_main_image2_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="325dp"
+                    android:scaleType="centerCrop"
+                    app:riv_corner_radius_top_left="20dp"
+                    app:riv_corner_radius_top_right="20dp"
+                    app:riv_border_color="#333333"
+                    app:riv_mutate_background="true"
+                    app:riv_oval="false" />
+                <TextView
+                    android:id="@+id/imageview_title_back"
+                    android:layout_margin="9dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2"
+                    android:text="테스트~!" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:layout_margin="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            app:cardCornerRadius="20dp"
+            app:cardUseCompatPadding="true">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/imageview_main_image2"
+                    android:layout_width="match_parent"
+                    android:layout_height="325dp"
+                    android:scaleType="centerCrop"
+                    app:riv_corner_radius_top_left="20dp"
+                    app:riv_corner_radius_top_right="20dp"
+                    app:riv_border_color="#333333"
+                    app:riv_mutate_background="true"
+                    app:riv_oval="false" />
+                <TextView
+                    android:id="@+id/imageview_title"
+                    android:layout_margin="9dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.2"
+                    android:text="짜란~!" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+
+</com.wajahatkarim3.easyflipview.EasyFlipView>

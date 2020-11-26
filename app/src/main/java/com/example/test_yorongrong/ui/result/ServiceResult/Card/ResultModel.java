@@ -9,15 +9,11 @@ public class ResultModel {
     public String getTitle() {
         return title;
     }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public void setTitle(String title) { this.title = title; }
 
     public int getImg() {
         return img;
     }
-
     public void setImg(int img) {
         this.img = img;
     }
@@ -25,7 +21,6 @@ public class ResultModel {
     public String getShop_info() {
         return shop_info;
     }
-
     public void setShop_info(String shop_info) {
         this.shop_info = shop_info;
     }
@@ -33,7 +28,6 @@ public class ResultModel {
     public String getPresent() {
         return present;
     }
-
     public void setPresent(String present) {
         this.present = present;
     }
