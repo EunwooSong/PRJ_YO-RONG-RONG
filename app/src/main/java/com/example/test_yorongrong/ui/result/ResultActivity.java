@@ -49,12 +49,12 @@ public class ResultActivity extends AppCompatActivity {
         switchFragment(loading);
 
 
-        ((Button)findViewById(R.id.btn_test)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switchFragment(result);
-            }
-        });
+//        ((Button)findViewById(R.id.btn_test)).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                switchFragment(result);
+//            }
+//        });
 
         ((FloatingActionButton)findViewById(R.id.btn_back)).setOnClickListener(new View.OnClickListener() {
             @Override
