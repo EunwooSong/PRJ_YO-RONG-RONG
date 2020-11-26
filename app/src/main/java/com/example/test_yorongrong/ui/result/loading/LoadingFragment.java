@@ -1,12 +1,19 @@
-package com.example.test_yorongrong;
+package com.example.test_yorongrong.ui.result.loading;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.example.test_yorongrong.R;
+import com.example.test_yorongrong.ui.result.ResultActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,6 +53,9 @@ public class LoadingFragment extends Fragment {
         return fragment;
     }
 
+    public Bitmap img;
+    ImageView imageView;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +69,17 @@ public class LoadingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        //img = ((ResultActivity) getActivity()).img;
+
+        imageView = (ImageView) container.findViewById(R.id.cameraImg);
+        try{imageView.setImageBitmap(img);}catch(Exception e){Log.e("",e+"");}
+
         return inflater.inflate(R.layout.fragment_loading, container, false);
+    }
+
+    public void setImageView(byte[] data) {
+        this.img =  BitmapFactory.decodeByteArray(data, 0, data.length);
+        if(img == null)
+            Log.e("error", "img null");
     }
 }
