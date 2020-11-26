@@ -38,6 +38,8 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CardHolder> {
     public void onBindViewHolder(@NonNull final CardHolder myHolder, int i) {
         myHolder.mTitle.setText(models.get(i).getTitle());
         myHolder.mImageView.setImageResource(models.get(i).getImg());
+        myHolder.mTitle_back.setText(models.get(i).getTitle_back());
+        myHolder.mImageView_back.setImageResource(models.get(i).getImg_back());
 
         myHolder.flipView.setOnClickListener(new View.OnClickListener() {
             @Override

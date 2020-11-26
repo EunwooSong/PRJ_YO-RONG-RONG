@@ -47,6 +47,8 @@ public class HomeFragment extends Fragment {
     private String imageFilePath;
     private String photoUri;
 
+    boolean onOffFlash;
+
     private MediaRecorder mediaRecorder;
 
 
@@ -68,6 +70,15 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ((MainActivity)getActivity()).goToAlbum();
+            }
+        });
+
+        onOffFlash = false;
+        root.findViewById(R.id.btn_flash_control).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onOffFlash = !onOffFlash;
+                showCamera.onOffFlash(onOffFlash);
             }
         });
         return root;

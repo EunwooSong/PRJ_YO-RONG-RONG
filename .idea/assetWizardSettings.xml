@@ -322,7 +322,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/add_box/baseline_add_box_24.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/flare/baseline_flare_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -332,7 +332,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_add_box_24" />
+                            <entry key="outputName" value="ic_baseline_flare_24" />
                             <entry key="sourceFile" value="C:\Users\EunwooSong\Desktop\Git\Android\PRJ_YO-RONG-RONG" />
                           </map>
                         </option>

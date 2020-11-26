@@ -49,33 +49,45 @@ public class DashboardFragment extends Fragment {
 
         Model m = new Model();
 
-        m.setTitle("Test Model");
-        m.setImg(R.drawable.images);
+        m.setTitle_back("챈스챈스");
+        m.setImg_back(R.drawable.chance_chance);
+        m.setTitle("체크메이트");
+        m.setImg(R.drawable.checkmate);
         models.add(m);
 
         m = new Model();
-        m.setTitle("Test Model");
-        m.setImg(R.drawable.images);
+        m.setTitle_back("트레셔");
+        m.setImg_back(R.drawable.thrasher);
+        m.setTitle("어커버");
+        m.setImg(R.drawable.acover);
         models.add(m);
 
         m = new Model();
-        m.setTitle("Test Model");
-        m.setImg(R.drawable.images);
+        m.setTitle_back("디스이즈네버뎃");
+        m.setImg_back(R.drawable.chance_chance);
+        m.setTitle("플루크");
+        m.setImg(R.drawable.checkmate);
         models.add(m);
 
         m = new Model();
-        m.setTitle("Test Model");
-        m.setImg(R.drawable.images);
+        m.setTitle_back("오아이오아이");
+        m.setImg_back(R.drawable.oioi);
+        m.setTitle("척");
+        m.setImg(R.drawable.chuck);
         models.add(m);
 
         m = new Model();
-        m.setTitle("Test Model");
-        m.setImg(R.drawable.images);
+        m.setTitle_back("유엔지레이어");
+        m.setImg_back(R.drawable.unglayer);
+        m.setTitle("야키요루");
+        m.setImg(R.drawable.yakiyo);
         models.add(m);
 
         m = new Model();
-        m.setTitle("Test Model");
-        m.setImg(R.drawable.images);
+        m.setTitle_back("메종 마르지엘라");
+        m.setImg_back(R.drawable.mejong);
+        m.setTitle("피스메이커");
+        m.setImg(R.drawable.peace_maker);
         models.add(m);
 
         return models;

@@ -23,6 +23,8 @@
         app:fabCustomSize="85dp"
         app:tint="@android:color/white"
         app:rippleColor="@android:color/white"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="7dp"
         />
 
     <FrameLayout

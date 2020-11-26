@@ -114,4 +114,11 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
             }
         });
     }
+
+    public void onOffFlash(boolean flash) {
+        Camera.Parameters param = camera.getParameters();
+        param.setFlashMode((flash) ? Camera.Parameters.FLASH_MODE_TORCH :Camera.Parameters.FLASH_MODE_OFF );
+        camera.setParameters(param);
+        camera.startPreview();
+    }
 }
