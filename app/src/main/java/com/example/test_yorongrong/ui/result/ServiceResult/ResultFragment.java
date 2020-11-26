@@ -110,20 +110,6 @@ public class ResultFragment extends Fragment {
         m.setImg(R.drawable.images);
         models.add(m);
 
-        m = new ResultModel();
-        m.setTitle("ResultModel2");
-        m.setPresent("---%");
-        m.setShop_info("11번가");
-        m.setImg(R.drawable.images);
-        models.add(m);
-
-        m = new ResultModel();
-        m.setTitle("ResultModel3");
-        m.setPresent("---%");
-        m.setShop_info("11번가");
-        m.setImg(R.drawable.images);
-        models.add(m);
-
         for (ResultModel model:
              models) {
             Log.i("model", "test : " + model.getTitle());
