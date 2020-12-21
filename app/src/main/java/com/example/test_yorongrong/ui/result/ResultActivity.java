@@ -1,5 +1,6 @@
 package com.example.test_yorongrong.ui.result;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -8,7 +9,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -22,6 +25,11 @@ import com.example.test_yorongrong.ui.result.ServiceResult.ResultFragment;
 import com.example.test_yorongrong.ui.result.loading.LoadingFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.UUID;
 
 import retrofit2.Call;
@@ -31,14 +39,9 @@ import retrofit2.Response;
 public class ResultActivity extends AppCompatActivity {
     LoadingFragment loading;
     ResultFragment result;
-
-    private final TelephonyManager tm = (TelephonyManager)getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
-
     private static final String BASE_URL = "https://scon.postect.tech/api/";
-    private final String tmDevice = "" + this.tm.getDeviceId();
-    private final String tmSerial = "" + this.tm.getSimSerialNumber();
-    private final String androidId = "" + android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,22 +63,23 @@ public class ResultActivity extends AppCompatActivity {
         switchFragment(loading);
 
         // api communication
-        UUID deviceUuid = new UUID(androidId.hashCode(), ((long)tmDevice.hashCode() << 32) | tmSerial.hashCode());
-        String phone_id = deviceUuid.toString();
+        TelephonyManager tManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        String uuid = tManager.getDeviceId();
 
-        NetworkHelper.getInstance(BASE_URL).Compare(phone_id, "").enqueue(new Callback<Data>() {
-            @Override
-            public void onResponse(Call<Data> call, Response<Data> response) {
-                Data data = response.body();
-                data.getImg();
+        Log.d("uuid", uuid);
+        File fi = new File(path);
+        try {
+            byte[] fileContent = Files.readAllBytes(fi.toPath());
+            Log.d("files array", fileContent.toString());
+            final boolean isCommunicate = false;
 
+            if(isCommunicate){
+                switchFragment(result);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-            @Override
-            public void onFailure(Call<Data> call, Throwable t) {
-
-            }
-        });
 
 //        ((Button)findViewById(R.id.btn_test)).setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -92,14 +96,31 @@ public class ResultActivity extends AppCompatActivity {
         });
     }
 
+    public boolean APICommunication(String uuid, byte[] img) {
+        final boolean[] result = {false};
+        NetworkHelper.getInstance(BASE_URL).Compare(uuid, img).enqueue(new Callback<Data>() {
+            @Override
+            public void onResponse(Call<Data> call, Response<Data> response) {
+                Data data = response.body();
+                data.getImg();
+                result[0] = true;
+            }
+
+            @Override
+            public void onFailure(Call<Data> call, Throwable t) {
+
+            }
+        });
+
+        return result[0];
+    }
+
     private void switchFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_right);
         transaction.replace(R.id.result_fragment, fragment);
         transaction.commit();
     }
-
-
 
 
     //ApiService에 적어놓았던 꼴리는 함수이) 하면 뭐 뜰꺼임 그거 하면 됌 그러면 Success메소드 faiulre메소드 둘다 오버라이딩 됌 이거 인터페이스 ㅂ라서 임플레ㅣ먼ㅊ츠됌

@@ -1,25 +1,32 @@
 package com.example.test_yorongrong.ui.result.ServiceResult;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
+import com.example.test_yorongrong.Data.AllData;
+import com.example.test_yorongrong.Data.model;
 import com.example.test_yorongrong.R;
+import com.example.test_yorongrong.api.NetworkHelper;
 import com.example.test_yorongrong.ui.result.ServiceResult.Card.ResultAdapter;
 import com.example.test_yorongrong.ui.result.ServiceResult.Card.ResultModel;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.yarolegovich.discretescrollview.DiscreteScrollView;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,7 +39,8 @@ public class ResultFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private static final String BASE_URL = "https://scon.postect.tech/api";
+    private model[] data;
 
 
     // TODO: Rename and change types of parameters
@@ -100,15 +108,40 @@ public class ResultFragment extends Fragment {
         return root;
     }
 
+    public model[] APICommunication(String uuid) {
+        final model[][] result = {new model[1]};
+        NetworkHelper.getInstance(BASE_URL).GetAll(uuid).enqueue(new Callback<AllData>() {
+            @Override
+            public void onResponse(Call<AllData> call, Response<AllData> response) {
+                AllData data = response.body();
+                result[0] = data.getData();
+            }
+
+            @Override
+            public void onFailure(Call<AllData> call, Throwable t) {
+
+            }
+        });
+
+        return result[0];
+    }
+
     public void createResultModel() {
         ResultModel m;
 
-        m = new ResultModel();
-        m.setTitle("ResultModel1");
-        m.setPresent("---%");
-        m.setShop_info("11번가");
-        m.setImg(R.drawable.images);
-        models.add(m);
+        TelephonyManager tm = (TelephonyManager)getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+        String uuid = tm.getDeviceId();
+
+        model[] data = APICommunication(uuid);
+
+        for(model i: data) {
+            m = new ResultModel();
+            m.setTitle(i.name);
+            m.setPresent(i.per.toString()+"%");
+            m.setShop_info(i.market);
+            m.setImg(i.img);
+            models.add(m);
+        }
 
         for (ResultModel model:
              models) {

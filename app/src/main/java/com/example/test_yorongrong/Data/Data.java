@@ -2,7 +2,7 @@ package com.example.test_yorongrong.Data;
 
 public class Data {
     private String phone_id;
-    private String img;
+    private byte[] img;
 
     public String getPhone_id() {
         return phone_id;
@@ -12,11 +12,11 @@ public class Data {
         this.phone_id = phone_id;
     }
 
-    public String getImg() {
+    public byte[] getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(byte[] img) {
         this.img = img;
     }
 }

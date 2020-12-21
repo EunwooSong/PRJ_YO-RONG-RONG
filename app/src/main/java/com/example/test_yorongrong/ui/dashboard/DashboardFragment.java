@@ -1,7 +1,9 @@
 package com.example.test_yorongrong.ui.dashboard;
 
+import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +16,22 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.test_yorongrong.Data.AllData;
+import com.example.test_yorongrong.Data.model;
 import com.example.test_yorongrong.R;
+import com.example.test_yorongrong.api.NetworkHelper;
+import com.example.test_yorongrong.ui.result.ServiceResult.Card.ResultModel;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class DashboardFragment extends Fragment {
 
+    private static final String BASE_URL = "https://scon.postect.tech/api";
     private DashboardViewModel dashboardViewModel;
 
     ArrayList<Model> models = new ArrayList<>();
@@ -45,50 +56,46 @@ public class DashboardFragment extends Fragment {
         return root;
     }
 
+    public model[] APICommunication(String uuid) {
+        final model[][] result = {new model[1]};
+        NetworkHelper.getInstance(BASE_URL).GetAll(uuid).enqueue(new Callback<AllData>() {
+            @Override
+            public void onResponse(Call<AllData> call, Response<AllData> response) {
+                AllData data = response.body();
+                result[0] = data.getData();
+            }
+
+            @Override
+            public void onFailure(Call<AllData> call, Throwable t) {
+
+            }
+        });
+
+        return result[0];
+    }
     private ArrayList<Model> getMyList() {
 
-        Model m = new Model();
-        m.setTitle_back("챈스챈스\n뒤집으면 카피논란이 있는 브랜드가 나옵니다");
-        m.setImg_back(R.drawable.chance_chance);
-        m.setTitle("체크메이트");
-        m.setImg(R.drawable.checkmate);
-        models.add(m);
+//        Model m = new Model();
+//        m.setTitle_back("챈스챈스\n뒤집으면 카피논란이 있는 브랜드가 나옵니다");
+//        m.setImg_back(R.drawable.chance_chance);
+//        m.setTitle("체크메이트");
+//        m.setImg(R.drawable.checkmate);
+//        models.add(m);
 
-        m = new Model();
-        m.setTitle_back("트레셔");
-        m.setImg_back(R.drawable.thrasher);
-        m.setTitle("어커버");
-        m.setImg(R.drawable.acover);
-        models.add(m);
 
-        m = new Model();
-        m.setTitle_back("디스이즈네버뎃");
-        m.setImg_back(R.drawable.chance_chance);
-        m.setTitle("플루크");
-        m.setImg(R.drawable.checkmate);
-        models.add(m);
+        TelephonyManager tm = (TelephonyManager)getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+        String uuid = tm.getDeviceId();
 
-        m = new Model();
-        m.setTitle_back("오아이오아이");
-        m.setImg_back(R.drawable.oioi);
-        m.setTitle("척");
-        m.setImg(R.drawable.chuck);
-        models.add(m);
+        model[] data = APICommunication(uuid);
 
-        m = new Model();
-        m.setTitle_back("유엔지레이어");
-        m.setImg_back(R.drawable.unglayer);
-        m.setTitle("야키요루");
-        m.setImg(R.drawable.yakiyo);
-        models.add(m);
-
-        m = new Model();
-        m.setTitle_back("메종 마르지엘라");
-        m.setImg_back(R.drawable.mejong);
-        m.setTitle("피스메이커");
-        m.setImg(R.drawable.peace_maker);
-        models.add(m);
-
+        for(model i: data) {
+            Model m = new Model();
+            m.setTitle(i.name);
+            m.setTitle_back(i.name2);
+            m.setImg_back(i.img);
+            m.setImg(i.img2);
+            models.add(m);
+        }
         return models;
     }
 }

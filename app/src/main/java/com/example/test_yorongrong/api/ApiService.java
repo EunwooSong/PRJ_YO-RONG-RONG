@@ -1,5 +1,6 @@
 package com.example.test_yorongrong.api;
 
+import com.example.test_yorongrong.Data.AllData;
 import com.example.test_yorongrong.Data.Data;
 
 import retrofit2.Call;
@@ -13,6 +14,12 @@ public interface ApiService {
     @FormUrlEncoded
     Call<Data> Compare(
             @Field("phone_id") String phone_id,
-            @Field("image") String image
+            @Field("image") byte[] image
+    );
+
+    @POST("getAll")
+    @FormUrlEncoded
+    Call<AllData> GetAll(
+            @Field("phone_id") String phone_id
     );
 }
